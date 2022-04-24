@@ -1,4 +1,4 @@
-package var.sockets.udp.ca;
+
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;

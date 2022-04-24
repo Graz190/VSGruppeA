@@ -1,16 +1,12 @@
-package var.sockets.udp.ca;
+
 
 //Meine Ip 141.19.156.87
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketAddress;
 import java.net.SocketException;
-import java.net.SocketTimeoutException;
 //import com.cloudbees.syslog.SyslogMessage; laut javadox gibt es eine Klasse SyslogMessage die ich aber nicht importieren kann
-import java.util.Random;
 
 public class SyslogClient {
 
@@ -21,7 +17,7 @@ public class SyslogClient {
   private static final int TIMEOUT = 0;
   private static InetAddress ipOfSyslogserver;
   private static final String BROADCAST = "255.255.255.255";
-  private static final String HOSTNAME = "ARSCHLOCH";
+  private static final String HOSTNAME = "admin";
   
 
   public static void main(String[] args) {
