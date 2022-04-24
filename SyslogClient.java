@@ -6,7 +6,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-//import com.cloudbees.syslog.SyslogMessage; laut javadox gibt es eine Klasse SyslogMessage die ich aber nicht importieren kann
 
 public class SyslogClient {
 
@@ -60,7 +59,7 @@ public class SyslogClient {
 
         // Implementierung Senden an Syslogserver, wenn ip von Syslogserver schon bekannt.
         else {
-          SyslogMessage sysMes = new SyslogMessage(HOSTNAME);
+          SyslogMessage sysMes = new SyslogMessage(2,HOSTNAME,"409900000000000000000000000","Hier ist mal was anderes drinne");
           byte[] data = sysMes.getSyslogMessageText().getBytes();
           DatagramPacket packetOut = new DatagramPacket(data, data.length, ipOfSyslogserver,
               SYSLOGPORT);
@@ -71,7 +70,6 @@ public class SyslogClient {
 
 
     } catch (SocketException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     } catch (Exception e) {
       e.printStackTrace();

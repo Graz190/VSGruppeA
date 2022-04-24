@@ -1,5 +1,3 @@
-
-
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.time.Instant;
@@ -21,17 +19,25 @@ public class SyslogMessage {
   
   
   
-  public SyslogMessage(int priority,int version, Instant timestamp, String hostname, String application, int processId, int messageId, String message) {
-    this.priority=priority;
-    this.version = version;
-    this.timestamp = timestamp;
-    this.hostname = hostname;
-    this.application= application;
-    this.processId = Integer.toString(processId);
-    this.messageId = Integer.toString(messageId);
-    this.message= message;
-    
-    //Hier fehlt Prüfung der richtigen Länge der einzelnen bestandteile und die Umwandlung in eine String
+  public SyslogMessage(int version, String hostname, String application, String message) {
+    int facility = ThreadLocalRandom.current().nextInt(0, 23+1);
+    int severity = ThreadLocalRandom.current().nextInt(0, 7+1);
+
+    this.priority = facility*severity;
+    this.version = version >10?10:version;
+    this.timestamp = Instant.now();
+    this.hostname = hostname.substring(0, Math.min(hostname.length(), 10));
+    this.application= application.substring(0, Math.min(application.length(), 10));
+    this.processId = "-";
+    this.messageId="ID"+Integer.toString(this.messageCounter);
+    this.messageCounter=messageCounter+1;
+    this.message= message.substring(0, Math.min(application.length(), 100));
+
+    this.syslogMessageText="<"+this.priority+">"+Integer.toString(this.version)+" "+this.timestamp.toString()
+            +" "+this.hostname+" "+this.application+" "+this.processId+" "+this.messageId+" "
+            +this.message;
+
+    //Hier fehlt Prüfung der richtigen Länge der einzelnen bestandteile und die Umwandlung in einen String
     
   }
   
