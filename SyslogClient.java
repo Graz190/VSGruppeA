@@ -21,7 +21,7 @@ public class SyslogClient {
   private static final int TIMEOUT = 0;
   private static InetAddress ipOfSyslogserver;
   private static final String BROADCAST = "255.255.255.255";
-  private static final String HOSTNAME = "ARSCHLOCH";
+  private static final String HOSTNAME = "admin";
   
 
   public static void main(String[] args) {
