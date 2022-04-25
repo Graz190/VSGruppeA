@@ -1,6 +1,6 @@
 
 
-//Meine Ip 141.19.156.87
+
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -16,24 +16,21 @@ public class SyslogClient {
   private static final int TIMEOUT = 0;
   private static InetAddress ipOfSyslogserver;
   private static final String BROADCAST = "255.255.255.255";
-  private static final String HOSTNAME = "admin";
+  private static final String HOSTNAME = "test.com";
   
 
   public static void main(String[] args) {
 
-    // SyslogMessage test = new SyslogMessage();
-    // System.out.println(test.getSyslogMessageText());
+    
 
     System.out.println("Start Client: " + HOSTNAME);
     
     try (DatagramSocket socket = new DatagramSocket()) {
       socket.setBroadcast(true);
       
-      // DatagramPacket packetIn;
-      // DatagramPacket packetOut;//Weis nicht ob richtig hier? Wahrscheinlich nicht:)
+     
       
-      
-      //Vielleicht noch hier automatisch die BROADCASTADRESSE herausfinden
+
       
      
       
@@ -59,7 +56,7 @@ public class SyslogClient {
 
         // Implementierung Senden an Syslogserver, wenn ip von Syslogserver schon bekannt.
         else {
-          SyslogMessage sysMes = new SyslogMessage(2,HOSTNAME,"409900000000000000000000000","Hier ist mal was anderes drinne");
+          SyslogMessage sysMes = new SyslogMessage(HOSTNAME);
           byte[] data = sysMes.getSyslogMessageText().getBytes();
           DatagramPacket packetOut = new DatagramPacket(data, data.length, ipOfSyslogserver,
               SYSLOGPORT);

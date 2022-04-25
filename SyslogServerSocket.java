@@ -26,7 +26,7 @@ public class SyslogServerSocket extends Thread {
 
     try (DatagramSocket socket = new DatagramSocket(this.port)){
 
-      DatagramPacket packetIn = new DatagramPacket(new byte[BUFSIZE], BUFSIZE);
+     
       
       System.out.println("Socket auf Port: " + this.port +" gestartet...");
 
@@ -35,13 +35,15 @@ public class SyslogServerSocket extends Thread {
       // gespeichert ist in dem Client und
       // er dann immer über den Syslogport und der bekannten IP-Adresse ansprechen kann
 
-      //Wie kann man das in einen Array einspeichern auf den alle Threads zugreifen: Synchronized? Siehe Video Tutorial Teil 3
+      
 
       while (true) {
+    	DatagramPacket packetIn = new DatagramPacket(new byte[BUFSIZE], BUFSIZE);
         socket.receive(packetIn);
         
         //Prüfung der Länge: Schauen was passiert wenn man eine größer Nachricht bekommt als die 2048
         //Einmal mit Absicht ein byte-Array größer als 2048 versenden. Hier wird die Nachricht einfach gelöscht
+        //Funktioniert
         
         if(packetIn.getLength()>2048) {
           continue;
@@ -51,6 +53,7 @@ public class SyslogServerSocket extends Thread {
         
         if(this.isBroadcastPort) {
           
+        	//Sendet leeres Datagram zurück
           SocketAddress senderSocketAddress = packetIn.getSocketAddress();
           DatagramPacket packetOut = new DatagramPacket(new byte[0], 0, senderSocketAddress);
           socket.send(packetOut);          

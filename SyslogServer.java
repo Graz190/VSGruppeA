@@ -9,11 +9,7 @@ public class SyslogServer {
   private static final int BUFSIZE = 2048;
 
   public static void main(final String[] args) {
-    // try (DatagramSocket syslogStandardSocket = new DatagramSocket(SYSLOGSTANDARDPORT);
-    // DatagramSocket broadcastSocket = new DatagramSocket(BROADCASTPORT)) {
-
-    // DatagramPacket packetIn = new DatagramPacket(new byte[BUFSIZE], BUFSIZE);
-    // DatagramPacket packetOut = new DatagramPacket(new byte[BUFSIZE], BUFSIZE);
+   
 
     System.out.println("Server gestartet ...");
 
@@ -26,8 +22,6 @@ public class SyslogServer {
     // Bei Port 8888(Broadcast discovery) leeres DataGram zurückschicken dass danach IP-Adresse
     // gespeichert ist in dem Client und
     // er dann immer über den Syslogport und der bekannten IP-Adresse ansprechen kann
-
-    //
 
    
   }
