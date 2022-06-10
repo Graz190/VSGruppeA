@@ -3,15 +3,11 @@ import java.util.*;
 
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
-import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+
 
 @ServerEndpoint("/socket")
 public class Websocket {
-	MqttClient test = new MqttClient("ssl://<your_host>:8883", // serverURI in format: 
-            // "protocol://name:port"
-            MqttClient.generateClientId(), // ClientId
-            new MemoryPersistence());
+	
 	private static List<Session> clients = new ArrayList<>();
 	@OnOpen
 	public void start(Session session) {
