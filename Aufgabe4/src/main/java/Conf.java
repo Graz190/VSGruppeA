@@ -3,15 +3,15 @@ public class Conf {
 	/**
 	 * beginning topic level topic 
 	 */
-	public static final String TOPICSTART = "SmartHome4751"; // should be made
+	public static final String TOPICSTART = "caA4"; // should be made
 																// unique
 
 	/**
 	 * broker 
 	 */
-	//public static final String BROKER = "tcp://localhost:1883"; // alternatively
+	public static final String BROKER = "tcp://localhost:1883"; // alternatively
 																// to HiveMQ
-	 public static final String BROKER = "tcp://broker.mqttdashboard.com";
+	//public static final String BROKER = "tcp://broker.mqttdashboard.com";
 	// alternatively to ApacheMQ
 
 	/**

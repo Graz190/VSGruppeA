@@ -6,13 +6,13 @@ import jakarta.websocket.server.ServerEndpoint;
 
 
 @ServerEndpoint("/socket")
-public class Websocket {
+public class ServerWebsocket {
 	
 	private static List<Session> clients = new ArrayList<>();
 	@OnOpen
 	public void start(Session session) {
 		try {
-			synchronized (Websocket.clients) {
+			synchronized (ServerWebsocket.clients) {
 				clients.add(session);
 				session.getBasicRemote().sendText("Verbindung wurde hergestellt.");
 			}
@@ -24,7 +24,7 @@ public class Websocket {
 	@OnClose
 	public void ended(Session session) {
 		try {
-			synchronized (Websocket.clients) {
+			synchronized (ServerWebsocket.clients) {
 				clients.remove(session);
 				System.out.println("client " + session + " ist nicht mehr dabei");
 			}
@@ -35,8 +35,8 @@ public class Websocket {
 
 	@OnMessage
 	public void message(Session session, String message) throws IOException {
-		synchronized (Websocket.clients) {
-			for (Session client : Websocket.clients) {
+		synchronized (ServerWebsocket.clients) {
+			for (Session client : ServerWebsocket.clients) {
 				if (client.isOpen() && !client.getId().equals(session.getId()))
 					client.getBasicRemote().sendText("client#" + session.getId() + ": " + message);
 			}
@@ -44,8 +44,8 @@ public class Websocket {
 	}
 	@OnError
 	public void error(Session session, Throwable ex) throws IOException{
-		synchronized(Websocket.clients) {
-			for(Session client : Websocket.clients) {
+		synchronized(ServerWebsocket.clients) {
+			for(Session client : ServerWebsocket.clients) {
 				if(client.isOpen()) 
 					client.getBasicRemote().sendText("client#"+session.getId()+ ": "+ ex.getMessage());
 			}
