@@ -1,13 +1,17 @@
 import java.io.IOException;
-import java.net.ServerSocket;
 
 
+public class WebSocketAdapter{
+	private int port;
+	private int backlog;
+	// public Websocketadapter
 
-public class WebSocketAdapter {
 	public static void main(String[] args) throws IOException {
-		ServerSocket server = new ServerSocket(80);
-		MQTTWebsocket mqttSocket= new MQTTWebsocket();
+		JMSWebsocket jmsWebsocket = new JMSWebsocket();
+		//ServerSocket server = new ServerSocket(80);
+		WebsocketMQTT mqttSocket = new WebsocketMQTT();
+		mqttSocket.start();
+		jmsWebsocket.start();
 		
-	
 	}
 }
