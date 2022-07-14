@@ -15,7 +15,7 @@ public class WebsocketMQTT extends Thread {
 
 	public void run() {
 
-		String topic = Conf.TOPICSTART + "/";
+		
 		try (MqttClient client = new MqttClient(Conf.BROKER, MqttClient.generateClientId())) {
 			client.setCallback(new MqttCallback() {
 				@Override
@@ -23,9 +23,14 @@ public class WebsocketMQTT extends Thread {
 					try {
 						ByteArrayInputStream b1 = new ByteArrayInputStream(m.toString().getBytes());
 						ObjectInputStream o1 = new ObjectInputStream(b1);
+						//SyslogMessage obj1=null;
+						try{
 						SyslogMessage obj1 = (SyslogMessage) o1.readObject();
 						if(obj1.sev()!=SyslogMessage.Severity.NOTICE|| obj1.sev()!=SyslogMessage.Severity.INFORMATIONAL||obj1.sev()!=SyslogMessage.Severity.DEBUG) {
 							System.out.println(obj1.toString());
+						}
+						}catch(Exception e) {
+							System.out.println("Not a SyslogMessage");
 						}
 
 					} catch (NumberFormatException e) {
@@ -42,7 +47,7 @@ public class WebsocketMQTT extends Thread {
 				}
 			});
 			client.connect();
-			client.subscribe(topic);
+			client.subscribe(Conf.TOPICSTART);
 			try {
 				while (true) {
 					Thread.sleep(1000);
