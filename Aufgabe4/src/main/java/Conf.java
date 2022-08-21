@@ -18,5 +18,6 @@ public class Conf {
 	 * MQTT quality of service level 
 	 */
 	public static final int QOS = 2;
+	
 }
 
