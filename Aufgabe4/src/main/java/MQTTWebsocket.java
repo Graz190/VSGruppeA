@@ -11,16 +11,16 @@ public class MQTTWebsocket {
 	
 	public static void main(String[] args) throws MqttException {
 		
-		String topic = Conf.TOPICSTART + "/" + args[0] + "/" + args[1] + "/" + args[2];
-		threshold = Double.valueOf(args[3]);
+		String topic = Conf.TOPICSTART + "/" + args[0];
+		//threshold = Double.valueOf(args[3]);
 		MqttClient client = new MqttClient(Conf.BROKER, MqttClient.generateClientId());
 		client.setCallback(new MqttCallback() {
 			@Override
 			public void messageArrived(String topic, MqttMessage m) throws Exception {
 				try {
 					double observation = Double.valueOf(m.toString());
-					if (observation > threshold) {
-						System.out.println("ALARM: " + topic + ": " + m);
+					//if (observation > threshold) {
+						//System.out.println("ALARM: " + topic + ": " + m);
 					}
 				} catch (NumberFormatException e) {
 					System.out.println(m); // message is not a sensor
